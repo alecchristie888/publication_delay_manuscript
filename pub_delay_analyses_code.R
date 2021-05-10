@@ -227,7 +227,7 @@ ggplot(masterall_trim_mainmodqp)+
   facet_wrap(.~pubtypelabel,ncol=1,scales="free_y")+
   theme(aspect.ratio=0.33,strip.text = element_text(size=19,margin=margin(5,5,5,5,unit="pt")),axis.title=element_text(size=21),axis.text = element_text(size=18),strip.background = element_rect(fill="grey90"))
 
-#ggsave("delayplotsforpaperbypubtype.svg",height=45,width=45,units="cm",device="svg")
+ggsave("Figure2.svg",height=45,width=45,units="cm",device="svg")
 
 
 #####################################################################################################
@@ -319,7 +319,7 @@ plot1b<-ggplot(masterall_syn_plotnotall) +
 ##### arrange overall plot with plot by separate synopses
 ggarrange(plot1a,plot1b, labels=c("A","B"), nrow=2,ncol=1, heights=c(1,2), font.label=list(size=25))
 
-#ggsave("delayplotsforpaper.svg",height=45,width=60,units="cm",device="svg")
+ggsave("Figure1.svg",height=45,width=60,units="cm",device="svg")
 
 
 
@@ -346,7 +346,7 @@ ggplot() + geom_hex(data=masterall_trim_mainmodqp,aes(y=datediff,x=pubdate),colo
   guides(fill=guide_colourbar(title="Number of studies"))+
   theme(aspect.ratio=1,axis.title=element_text(size=23),axis.text.y=element_text(size=20),axis.text.x=element_text(size=20),legend.text = element_text(size=20),legend.title=element_text(size=20))
 
-#ggsave("pubdelay_overtimeplots.svg",height=45,width=45,units="cm",device="svg")
+ggsave("Figure3.svg",height=45,width=45,units="cm",device="svg")
 
 ##### create plot of publication delay over time - use all data including delay >20 years
 ggplot() + geom_hex(data=masterall_trim_mainmodqp,aes(y=datediff,x=pubdate),colour="black",bins=101)+
@@ -361,7 +361,7 @@ ggplot() + geom_hex(data=masterall_trim_mainmodqp,aes(y=datediff,x=pubdate),colo
   guides(fill=guide_colourbar(title="Number of studies"))+
   theme(aspect.ratio=1,axis.title=element_text(size=23),axis.text.y=element_text(size=20),axis.text.x=element_text(size=20),legend.text = element_text(size=20),legend.title=element_text(size=20))
 
-#ggsave("pubdelay_overtimeplots_alldata.svg",height=45,width=45,units="cm",device="svg")
+ggsave("FigureS1.svg",height=45,width=45,units="cm",device="svg")
 
 
 #######################################################################################################
@@ -372,7 +372,7 @@ ampdat <- fread(choose.files())
 birddat <- fread(choose.files())
 mamdat <- fread(choose.files())
 
-masterall_trim_taxa_all <- unique(masterall_trim[,list(pageid,lat,long,before,controlled,randomised,int,syn,stdate1,stdate2,datediff,binom,class,pubtype,pubdate)])
+masterall_trim_taxa_all <- unique(masterall_trim[,list(pageid,before,controlled,randomised,int,syn,stdate1,stdate2,datediff,binom,class,pubtype,pubdate)])
 
 ampdat$scientificName<-tolower(ampdat$scientificName)
 namesamp <- unique(masterall_trim_taxa_all[syn=="Amphibian Conservation"&class=="Amphibia"&!is.na(masterall_trim_taxa_all$binom),binom])
@@ -583,7 +583,7 @@ plotmam<-ggplot(masterall_trim_taxa_allcleanmostuniq[syn=="Terrestrial Mammal Co
 
 ###### combine plots
 ggarrange(plotamp,plotbird,plotmam,nrow=1)
-#ggsave("pubdelay_iucnplots.svg",height=45,width=45,units="cm",device="svg")
+ggsave("Figure4.svg",height=45,width=45,units="cm",device="svg")
 
 
 
@@ -612,4 +612,4 @@ ggplot(masterall_trim_taxa_allcleanmostuniqall) +
         legend.position = "none",plot.title=element_text(size=20))+  
   scale_fill_manual(values=c((brewer.pal(n=5, name="OrRd"))[1:5]))+ggtitle("Amphibians, Birds, and Mammals")
 
-#ggsave("pubdelay_iucnplots_all.svg",height=45,width=45,units="cm",device="svg")
+ggsave("FigureS2.svg",height=45,width=45,units="cm",device="svg")
